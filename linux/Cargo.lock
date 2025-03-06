@@ -243,9 +243,9 @@ dependencies = [
 
 [[package]]
 name = "cargo_toml"
-version = "0.18.0"
+version = "0.21.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "802b755090e39835a4b0440fb0bbee0df7495a8b337f63db21e616f7821c7e8c"
+checksum = "5fbd1fe9db3ebf71b89060adaf7b0504c2d6a425cf061313099547e382c2e472"
 dependencies = [
  "serde",
  "toml 0.8.20",
@@ -619,8 +619,6 @@ dependencies = [
 [[package]]
 name = "flutter_rust_bridge_codegen"
 version = "2.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "86370aeff26899629c3c47df78b7412653bab930a0c4b27de73b52c997dc0caa"
 dependencies = [
  "anyhow",
  "cargo_metadata",

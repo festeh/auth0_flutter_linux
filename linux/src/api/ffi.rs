@@ -3,10 +3,12 @@ use serde::{Deserialize, Serialize};
 
 use flutter_rust_bridge::frb;
 
+#[frb(unignore)]
 #[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct AuthRequestData {}
+pub struct AuthRequestData {
+    pub domain: String,
+}
 
-#[frb]
 pub fn web_authentication_login(
     request: AuthRequestData,
 ) -> flutter_rust_bridge::ZeroCopyBuffer<Vec<u8>> {
@@ -15,11 +17,10 @@ pub fn web_authentication_login(
     ZeroCopyBuffer(response)
 }
 
-#[frb]
 pub fn web_authentication_logout(
-    domain: String,
-    client_id: String,
-    return_to: Option<String>,
+    _domain: String,
+    _client_id: String,
+    _return_to: Option<String>,
 ) -> flutter_rust_bridge::ZeroCopyBuffer<Vec<u8>> {
     let response = vec![];
     ZeroCopyBuffer(response)
