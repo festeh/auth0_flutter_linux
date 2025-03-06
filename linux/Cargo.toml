@@ -10,7 +10,10 @@ crate-type = ["cdylib"]
 
 [dependencies]
 flutter_rust_bridge = "=2.8.0"
-serde = "1.0.218"
+serde = {version = "1.0.218", features = ["derive"]}
 
 [build-dependencies]
 flutter_rust_bridge_codegen = "2.8.0"
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(frb_expand)'] }
