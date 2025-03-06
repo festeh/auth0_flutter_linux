@@ -13,14 +13,11 @@ Future<void> main() async {
   print('Current working directory: ${Directory.current.path}');
   var config = ExternalLibraryLoaderConfig(
     stem: 'auth0_flutter_linux',
-    ioDirectory: '../linux/target/release',
+    ioDirectory: 'lib/',
     webPrefix: 'pkg/',
   );
   await RustLib.init(
     externalLibrary: await loadExternalLibrary(config),
-    // externalLibrary: ExternalLibrary.open(
-    // "libauth0_flutter_linux.so",
-    // )
   );
   Auth0FlutterLinux.registerWith();
   runApp(const MyApp());

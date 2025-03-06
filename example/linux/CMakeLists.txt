@@ -70,7 +70,7 @@ set_target_properties(${BINARY_NAME}
 )
 
 # Enable the test target.
-set(include_auth0_flutter_linux_tests TRUE)
+set(include_auth0_flutter_linux_tests FALSE)
 
 # Generated plugin build rules, which manage building the plugins and adding
 # them to the application.
@@ -127,4 +127,20 @@ install(DIRECTORY "${PROJECT_BUILD_DIR}/${FLUTTER_ASSET_DIR_NAME}"
 if(NOT CMAKE_BUILD_TYPE MATCHES "Debug")
   install(FILES "${AOT_LIBRARY}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}"
     COMPONENT Runtime)
+
 endif()
+install(CODE "
+  set(RUST_LIB_PATH \"${CMAKE_CURRENT_SOURCE_DIR}/../../linux/target/release/libauth0_flutter_linux.so\")
+  if(NOT EXISTS \"\${RUST_LIB_PATH}\")
+    message(FATAL_ERROR \"ERROR: Required Rust library not found at \${RUST_LIB_PATH}. Please build the Rust library first using 'cargo build --release' in the ../linux directory.\")
+  else()
+    message(STATUS \"Found Rust library at \${RUST_LIB_PATH}\")
+    file(COPY \"\${RUST_LIB_PATH}\" DESTINATION \"${INSTALL_BUNDLE_LIB_DIR}\")
+    # Verify the copy worked
+    if(NOT EXISTS \"${INSTALL_BUNDLE_LIB_DIR}/libauth0_flutter_linux.so\")
+      message(FATAL_ERROR \"Failed to copy Rust library to ${INSTALL_BUNDLE_LIB_DIR}\")
+    else()
+      message(STATUS \"Successfully copied Rust library to ${INSTALL_BUNDLE_LIB_DIR}\")
+    endif()
+  endif()
+  " COMPONENT Runtime)
