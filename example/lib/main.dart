@@ -5,9 +5,20 @@ import 'package:flutter/services.dart';
 import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:auth0_flutter_linux/auth0_flutter_linux.dart';
 import 'package:auth0_flutter_linux/src/rust/frb_generated.dart';
+import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated_io.dart';
 
 Future<void> main() async {
-  await RustLib.init();
+  var config = ExternalLibraryLoaderConfig(
+    stem: 'auth0_flutter_linux',
+    ioDirectory: '../linux/target/release',
+    webPrefix: 'pkg/',
+  );
+  await RustLib.init(
+    externalLibrary: await loadExternalLibrary(config),
+    // externalLibrary: ExternalLibrary.open(
+    // "libauth0_flutter_linux.so",
+    // )
+  );
   Auth0FlutterLinux.registerWith();
   runApp(const MyApp());
 }
@@ -36,22 +47,22 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> login() async {
-      setState(() {
-        status = 'Attempting login...';
-      });
+    setState(() {
+      status = 'Attempting login...';
+    });
 
-      try {
-        await auth0.webAuthentication().login();
-        setState(() {
-          status = 'Logged in successfully';
-        });
-      } catch (e) {
-        print(e);
-        setState(() {
-          status = 'Error: ${e.toString()}';
-        });
-      }
+    try {
+      await auth0.webAuthentication().login();
+      setState(() {
+        status = 'Logged in successfully';
+      });
+    } catch (e) {
+      print(e);
+      setState(() {
+        status = 'Error: ${e.toString()}';
+      });
     }
+  }
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
