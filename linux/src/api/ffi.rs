@@ -9,12 +9,10 @@ pub struct AuthRequestData {
 }
 
 #[frb(unignore)]
-pub fn web_authentication_login(
-    request: AuthRequestData,
-) -> Vec<u8> {
-    println!("{:?}", request);
+pub fn web_authentication_login(request: AuthRequestData) -> Vec<u8> {
+    println!("Request {:?}", request);
     let response = vec![];
-    ZeroCopyBuffer(response)
+    response
 }
 
 pub fn web_authentication_logout(
@@ -23,5 +21,5 @@ pub fn web_authentication_logout(
     _return_to: Option<String>,
 ) -> Vec<u8> {
     let response = vec![];
-    ZeroCopyBuffer(response)
+    response
 }

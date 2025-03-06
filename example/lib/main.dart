@@ -4,8 +4,10 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:auth0_flutter_linux/auth0_flutter_linux.dart';
+import 'package:auth0_flutter_linux/src/rust/frb_generated.dart';
 
-void main() {
+Future<void> main() async {
+  await RustLib.init();
   Auth0FlutterLinux.registerWith();
   runApp(const MyApp());
 }
