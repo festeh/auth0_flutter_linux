@@ -5,6 +5,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         rust_root: Some("./".into()),
         rust_input: Some("crate::api".into()),
         dart_output: Some(".".into()),
+        stop_on_error: Some(true),
         ..Default::default()
     };
     codegen::generate(config, Default::default())?;
