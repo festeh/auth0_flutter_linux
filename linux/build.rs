@@ -7,8 +7,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         dart_output: Some(".".into()),
         ..Default::default()
     };
-    let meta = codegen::MetaConfig { watch: false };
-
-    codegen::generate(config, meta)?;
+    codegen::generate(config, Default::default())?;
     Ok(())
 }

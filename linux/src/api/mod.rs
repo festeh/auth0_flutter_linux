@@ -1,2 +1,2 @@
-mod ffi;
-mod web_auth;
+pub mod ffi;
+pub mod web_auth;
