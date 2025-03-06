@@ -1,14 +1,11 @@
-use flutter_rust_bridge::ZeroCopyBuffer;
 use serde::{Deserialize, Serialize};
 
-use flutter_rust_bridge::frb;
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct AuthRequestData {
     pub domain: String,
 }
 
-#[frb(unignore)]
 pub fn web_authentication_login(request: AuthRequestData) -> Vec<u8> {
     println!("Request {:?}", request);
     let response = vec![];

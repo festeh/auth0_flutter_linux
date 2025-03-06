@@ -10,10 +10,9 @@ class Auth0FlutterWebAuthLinux extends Auth0FlutterWebAuthPlatform {
   Future<Credentials> login(WebAuthRequest request) async {
     try {
       final options = request.options;
-      final parameters =
-          options.parameters.entries.map((e) => (e.key, e.value)).toList();
-
-
+      // final parameters =
+      //     options.parameters.entries.map((e) => (e.key, e.value)).toList();
+      throw UnimplementedError();
     } catch (e) {
       if (e is WebAuthenticationException) {
         rethrow;
