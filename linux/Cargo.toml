@@ -1,0 +1,16 @@
+[package]
+name = "auth0_flutter_linux"
+version = "0.1.0"
+edition = "2021"
+description = "Linux plugin for the Auth0 Flutter SDK."
+
+[lib]
+name = "auth0_flutter_plugin"
+crate-type = ["cdylib"]
+
+[dependencies]
+flutter_rust_bridge = "=2.8.0"
+serde = "1.0.218"
+
+[build-dependencies]
+flutter_rust_bridge_codegen = "2.8.0"
