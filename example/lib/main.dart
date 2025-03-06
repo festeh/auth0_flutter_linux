@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:auth0_flutter/auth0_flutter.dart';
@@ -8,6 +9,8 @@ import 'package:auth0_flutter_linux/src/rust/frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated_io.dart';
 
 Future<void> main() async {
+  // Print current working directory
+  print('Current working directory: ${Directory.current.path}');
   var config = ExternalLibraryLoaderConfig(
     stem: 'auth0_flutter_linux',
     ioDirectory: '../linux/target/release',
