@@ -6,28 +6,12 @@
 import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-Future<Uint8List> webAuthenticationLogin({required AuthRequestData request}) =>
-    RustLib.instance.api.crateApiFfiWebAuthenticationLogin(request: request);
+// These functions are ignored because they are not marked as `pub`: `get_content_type`, `get_static_dir`
+
+Future<Uint8List> webAuthenticationLogin() =>
+    RustLib.instance.api.crateApiFfiWebAuthenticationLogin();
 
 Future<Uint8List> webAuthenticationLogout(
         {required String domain, required String clientId, String? returnTo}) =>
     RustLib.instance.api.crateApiFfiWebAuthenticationLogout(
         domain: domain, clientId: clientId, returnTo: returnTo);
-
-class AuthRequestData {
-  final String domain;
-
-  const AuthRequestData({
-    required this.domain,
-  });
-
-  @override
-  int get hashCode => domain.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is AuthRequestData &&
-          runtimeType == other.runtimeType &&
-          domain == other.domain;
-}

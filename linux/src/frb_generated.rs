@@ -67,13 +67,11 @@ fn wire__crate__api__ffi__web_authentication_login_impl(
             };
             let mut deserializer =
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_request = <crate::api::ffi::AuthRequestData>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| {
                 transform_result_sse::<_, ()>((move || {
-                    let output_ok = Result::<_, ()>::Ok(
-                        crate::api::ffi::web_authentication_login(api_request),
-                    )?;
+                    let output_ok =
+                        Result::<_, ()>::Ok(crate::api::ffi::web_authentication_login())?;
                     Ok(output_ok)
                 })())
             }
@@ -128,14 +126,6 @@ impl SseDecode for String {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut inner = <Vec<u8>>::sse_decode(deserializer);
         return String::from_utf8(inner).unwrap();
-    }
-}
-
-impl SseDecode for crate::api::ffi::AuthRequestData {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_domain = <String>::sse_decode(deserializer);
-        return crate::api::ffi::AuthRequestData { domain: var_domain };
     }
 }
 
@@ -221,35 +211,10 @@ fn pde_ffi_dispatcher_sync_impl(
 
 // Section: rust2dart
 
-// Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::ffi::AuthRequestData {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        [self.domain.into_into_dart().into_dart()].into_dart()
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::ffi::AuthRequestData
-{
-}
-impl flutter_rust_bridge::IntoIntoDart<crate::api::ffi::AuthRequestData>
-    for crate::api::ffi::AuthRequestData
-{
-    fn into_into_dart(self) -> crate::api::ffi::AuthRequestData {
-        self
-    }
-}
-
 impl SseEncode for String {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <Vec<u8>>::sse_encode(self.into_bytes(), serializer);
-    }
-}
-
-impl SseEncode for crate::api::ffi::AuthRequestData {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <String>::sse_encode(self.domain, serializer);
     }
 }
 
