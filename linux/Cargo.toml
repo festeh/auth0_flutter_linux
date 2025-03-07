@@ -11,6 +11,7 @@ crate-type = ["cdylib"]
 [dependencies]
 flutter_rust_bridge = "=2.8.0"
 serde = {version = "1.0.218", features = ["derive"]}
+tiny_http = "0.12"
 
 [build-dependencies]
 flutter_rust_bridge_codegen = {path = "/home/dlipin/github/flutter_rust_bridge/frb_codegen"}
