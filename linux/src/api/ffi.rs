@@ -1,13 +1,5 @@
-use serde::{Deserialize, Serialize};
-
-
-#[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct AuthRequestData {
-    pub domain: String,
-}
-
-pub fn web_authentication_login(request: AuthRequestData) -> Vec<u8> {
-    println!("Request {:?}", request);
+pub fn web_authentication_login() -> Vec<u8> {
+    println!("Got request");
     let response = vec![];
     response
 }
